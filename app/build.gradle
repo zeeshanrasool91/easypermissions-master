@@ -1,0 +1,32 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
+android {
+    compileSdkVersion compileSdk
+
+    defaultConfig {
+        applicationId "pub.devrel.easypermissions.sample"
+        minSdkVersion 15
+        targetSdkVersion targetSdk
+        versionCode 1
+        versionName "1.0"
+        manifestPlaceholders = [
+                onesignal_app_id: 'd8c61717-d7d6-4bc7-b378-5eb35f80808c',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation "com.android.support:appcompat-v7:$support_library_version"
+    implementation 'com.onesignal:OneSignal:3.9.2'
+    implementation project(':easypermissions')
+}
